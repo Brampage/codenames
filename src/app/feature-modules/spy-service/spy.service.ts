@@ -50,7 +50,7 @@ export class SpyService {
         card.actualState = team;
       } else if (card.state === 'neutral') {
         card.actualState = 'neutral';
-      } else {
+      } else if (card.state === 'kill') {
         card.actualState = 'kill';
       }
     });
