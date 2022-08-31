@@ -46,7 +46,13 @@ export class SpyService {
   updateActualState(indexes: number[], team: 'team1' | 'team2') {
     indexes.forEach((index) => {
       const card = this.spyBoard[index];
-      card.actualState = team === card.state ? team : null;
+      if (card.state === team) {
+        card.actualState = team;
+      } else if (card.state === 'neutral') {
+        card.actualState = 'neutral';
+      } else {
+        card.actualState = 'kill';
+      }
     });
     console.log('updated:', this.spyBoard);
   }
