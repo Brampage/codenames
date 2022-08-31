@@ -50,35 +50,27 @@ export class AgentBoardComponent implements OnInit, OnDestroy {
   }
 
   onSubmitTeam1(): void {
-    const selectedWordIndexes = this.words
-      .map((word, index) => (word.isSelected ? index : -1))
-      .filter((x) => x !== -1);
-
-    this.spyService.updateActualState(selectedWordIndexes, 'team1');
-    this.resetSelected();
+    this.submit();
   }
 
   onSubmitTeam2(): void {
+    this.submit();
+  }
+
+  onShowSpyCard(): void {
+    this.spyService.updateActualState(Array.from({ length: 25 }, (v, i) => i));
+  }
+
+  private submit(): void {
     const selectedWordIndexes = this.words
       .map((word, index) => (word.isSelected ? index : -1))
       .filter((x) => x !== -1);
 
-    this.spyService.updateActualState(selectedWordIndexes, 'team2');
+    this.spyService.updateActualState(selectedWordIndexes);
     this.resetSelected();
   }
 
-  resetSelected(): void {
+  private resetSelected(): void {
     this.words = this.words.map((x) => ({ ...x, isSelected: false }));
-  }
-
-  onShowSpyCard(): void {
-    this.spyService.updateActualState(
-      Array.from({ length: 25 }, (v, i) => i),
-      'team1'
-    );
-    this.spyService.updateActualState(
-      Array.from({ length: 25 }, (v, i) => i),
-      'team2'
-    );
   }
 }
