@@ -4,7 +4,7 @@ type CardState = 'team1' | 'team2' | 'neutral' | 'kill';
 
 interface SpyCard {
   state: CardState;
-  actualState: CardState | null;
+  actualState: CardState | null | 'wrong';
 }
 
 @Injectable({
@@ -52,6 +52,8 @@ export class SpyService {
         card.actualState = 'neutral';
       } else if (card.state === 'kill') {
         card.actualState = 'kill';
+      } else {
+        card.actualState = 'wrong';
       }
     });
     console.log('updated:', this.spyBoard);
