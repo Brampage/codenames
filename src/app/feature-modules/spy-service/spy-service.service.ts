@@ -34,15 +34,12 @@ export class SpyServiceService {
 
     this.shuffle(states);
 
-    console.log('states', states);
-
     this.spyBoard = states.map((state) => {
       return {
         state: state,
         actualState: null,
       };
     });
-    console.log('this.spyBoard', this.spyBoard);
   }
 
   private getRandomState(): CardState {
