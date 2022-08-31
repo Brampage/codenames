@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { SpyServiceService } from '../spy-service/spy-service.service';
+import { SpyService } from '../spy-service/spy.service';
 import { WordsService } from '../words-service/words.service';
 
 export interface Word {
@@ -27,7 +27,7 @@ export class AgentBoardComponent implements OnInit, OnDestroy {
 
   constructor(
     private wordsService: WordsService,
-    private spyService: SpyServiceService
+    private spyService: SpyService
   ) {}
 
   ngOnInit(): void {

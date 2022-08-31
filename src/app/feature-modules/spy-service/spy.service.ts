@@ -10,7 +10,7 @@ interface SpyCard {
 @Injectable({
   providedIn: 'root',
 })
-export class SpyServiceService {
+export class SpyService {
   spyBoard: SpyCard[] = [];
   length: number = 0;
 
