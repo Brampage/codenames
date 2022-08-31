@@ -38,4 +38,8 @@ export class AgentBoardComponent implements OnInit, OnDestroy {
     const index = this.words.findIndex((x) => x.text === word.text);
     this.words[index].isSelected = !this.words[index].isSelected;
   }
+
+  onSubmit(): void {
+    console.log('submit', this.words.filter(word => word.isSelected));
+  }
 }
