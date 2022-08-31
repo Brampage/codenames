@@ -43,16 +43,10 @@ export class SpyService {
     console.log('game initialized:', this.spyBoard);
   }
 
-  updateActualState(indexes: number[], team: 'team1' | 'team2') {
+  updateActualState(indexes: number[]) {
     indexes.forEach((index) => {
       const card = this.spyBoard[index];
-      if (card.state === 'team1' || card.state === 'team2') {
-        card.actualState = card.state;
-      } else if (card.state === 'neutral') {
-        card.actualState = 'neutral';
-      } else if (card.state === 'kill') {
-        card.actualState = 'kill';
-      }
+      card.actualState = card.state;
     });
     console.log('updated:', this.spyBoard);
   }
