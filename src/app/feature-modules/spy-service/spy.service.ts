@@ -4,7 +4,7 @@ type CardState = 'team1' | 'team2' | 'neutral' | 'kill';
 
 interface SpyCard {
   state: CardState;
-  actualState: CardState | null | 'wrong';
+  actualState: CardState | null;
 }
 
 @Injectable({
@@ -46,14 +46,12 @@ export class SpyService {
   updateActualState(indexes: number[], team: 'team1' | 'team2') {
     indexes.forEach((index) => {
       const card = this.spyBoard[index];
-      if (card.state === team) {
-        card.actualState = team;
+      if (card.state === 'team1' || card.state === 'team2') {
+        card.actualState = card.state;
       } else if (card.state === 'neutral') {
         card.actualState = 'neutral';
       } else if (card.state === 'kill') {
         card.actualState = 'kill';
-      } else {
-        card.actualState = 'wrong';
       }
     });
     console.log('updated:', this.spyBoard);
