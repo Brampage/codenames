@@ -25,7 +25,10 @@ export class AgentBoardComponent implements OnInit, OnDestroy {
     return this.words.findIndex((x) => x.isSelected) === -1;
   }
 
-  constructor(private wordsService: WordsService) {}
+  constructor(
+    private wordsService: WordsService,
+    private spyService: SpyServiceService
+  ) {}
 
   ngOnInit(): void {
     this.words$ = this.wordsService.getWords(25);
@@ -49,7 +52,7 @@ export class AgentBoardComponent implements OnInit, OnDestroy {
   onSubmitTeam1(): void {
     console.log(
       'submit team 1',
-      this.words.filter((word) => word.isSelected)
+      this.words.findIndex((word) => word.isSelected)
     );
   }
 

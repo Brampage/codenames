@@ -4,6 +4,7 @@ type CardState = 'team1' | 'team2' | 'dead' | 'kill';
 
 interface SpyCard {
   state: CardState;
+  actualState: CardState | null;
 }
 
 @Injectable({
@@ -17,10 +18,15 @@ export class SpyServiceService {
     return this.spyBoard;
   }
 
+  checkCardState(index: number) {
+    return this.spyBoard[index].state;
+  }
+
   initializeGame(): void {
     this.spyBoard = Array.apply(null, Array(length)).map(() => {
       return {
         state: this.getRandomState(),
+        actualState: null,
       };
     });
   }
