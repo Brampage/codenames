@@ -25,7 +25,6 @@ export class WordsService implements OnDestroy {
         takeUntil(this.subscriptions),
         map(rawWords => {
           const dictionary: string[] = rawWords.split(/\n/);
-          console.log(rawWords.split(/\n/));
 
           return Array.apply(null, Array(length)).map(() => {
         return {
@@ -41,13 +40,6 @@ export class WordsService implements OnDestroy {
 
   getRandomWord(dictionary: string[]): string {
     const index = Math.floor(Math.random() * dictionary.length);
-
-    console.log('dictionary', dictionary);
-
-    const random= dictionary[index];
-    console.log('random', random);
-    console.log('index',index);
-
-    return random;
+    return dictionary[index];
   }
 }
