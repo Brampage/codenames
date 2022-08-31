@@ -56,7 +56,7 @@ export class SpyService {
     console.log('updated:', this.spyBoard);
   }
 
-  public checkWinner(): string {
+  public checkWinner(team: 'team1' | 'team2'): string {
     const selectedTeam1Length = this.spyBoard.filter(
       (card) => card.actualState === 'team1'
     ).length;
@@ -64,12 +64,19 @@ export class SpyService {
       (card) => card.actualState === 'team2'
     ).length;
 
-    if (selectedTeam1Length === this.team1Length) {
+    const isKilled = this.spyBoard.some((card) => card.actualState === 'kill');
+
+    if (isKilled) {
+      console.log('KILLED!!!');
+      return 'kill';
+    }
+
+    if (team === 'team1' && selectedTeam1Length === this.team1Length) {
       console.log('team 1 won!!!');
       return 'team1';
     }
 
-    if (selectedTeam2Length === this.team2Length) {
+    if (team === 'team2' && selectedTeam2Length === this.team2Length) {
       console.log('team 2 won!!!');
       return 'team2';
     }
