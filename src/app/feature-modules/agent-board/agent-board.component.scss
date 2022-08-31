@@ -1,21 +1,52 @@
-.agent-board {
+.container {
   height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "board"
+    "submit";
   gap: 1rem;
 
-  .agent-board__card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    background-color: lightblue;
-    color: black;
-    cursor: pointer;
+  .agent-board {
+    grid-area: board;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+
+    .agent-board__card {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      background-color: lightblue;
+      color: black;
+      cursor: pointer;
+    }
+
+    .card--selected {
+      box-shadow: inset 0px 0px 20px darkblue;
+    }
   }
 
-  .card--selected {
-    box-shadow: inset 0px 0px 20px darkblue;
+  .submit {
+    grid-area: submit;
+    text-align: center;
+    gap: 1rem;
+
+    button {
+      background-color: #008cba;
+      border: none;
+      color: white;
+      padding: 2rem 2rem;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    button:not(:last-child) {
+      margin-right: 1rem;
+    }
   }
 }
