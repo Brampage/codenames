@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-type CardState = 'team1' | 'team2' | 'dead' | 'kill';
+type CardState = 'team1' | 'team2' | 'neutral' | 'kill';
 
 interface SpyCard {
   state: CardState;
@@ -28,7 +28,7 @@ export class SpyService {
     const defaultTeamLength = (length - (length % 3)) / 3;
     const team1 = Array(defaultTeamLength + 1).fill('team1');
     const team2 = Array(defaultTeamLength).fill('team2');
-    const dead = Array(defaultTeamLength - 1).fill('dead');
+    const dead = Array(defaultTeamLength - 1).fill('neutral');
 
     const states: CardState[] = [...team1, ...team2, ...dead, 'kill'];
 
@@ -40,6 +40,7 @@ export class SpyService {
         actualState: null,
       };
     });
+    console.log('game initialized:', this.spyBoard);
   }
 
   updateActualState(indexes: number[], team: 'team1' | 'team2') {
@@ -47,6 +48,7 @@ export class SpyService {
       const card = this.spyBoard[index];
       card.actualState = team === card.state ? team : null;
     });
+    console.log('updated:', this.spyBoard);
   }
 
   private shuffle(array: CardState[]) {
