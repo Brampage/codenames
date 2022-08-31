@@ -10,11 +10,12 @@
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    background-color: purple;
+    background-color: lightblue;
     color: white;
+    cursor: pointer;
   }
 
   .card--selected {
-    box-shadow: inset 0px 0px 20px deeppink;
+    box-shadow: inset 0px 0px 20px darkblue;
   }
 }
