@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Word } from '../agent-board/agent-board.component';
-import {takeUntil} from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import {map, takeUntil} from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,12 +12,6 @@ export class WordsService implements OnDestroy {
   subscriptions = new Subject<any>();
 
   constructor(private http: HttpClient) {
-    this.http.get('app/assets/words.txt')
-      .pipe(
-        takeUntil(this.subscriptions)
-      ).subscribe((words: any) => {
-        console.log(words);
-      });
   }
 
   ngOnDestroy(): void {
@@ -25,15 +19,35 @@ export class WordsService implements OnDestroy {
       this.subscriptions.complete();
   }
 
-  getWords(length: number): Word[] {
-    // replace with word generator
-    return new Array<Word>(length).fill({
-      text: this.getRandomWord(),
-      isSelected: false,
-    });
+  getWords(length: number): Observable<Word[]> {
+     return this.http.get('/assets/words.txt', {responseType: 'text'})
+      .pipe(
+        takeUntil(this.subscriptions),
+        map(rawWords => {
+          const dictionary: string[] = rawWords.split(/\n/);
+          console.log(rawWords.split(/\n/));
+
+          return Array.apply(null, Array(length)).map(() => {
+        return {
+            text: this.getRandomWord(dictionary),
+            isSelected: false
+          }
+          });
+
+        })
+      );
+
   }
 
-  getRandomWord(): string {
-    return 'hey'
+  getRandomWord(dictionary: string[]): string {
+    const index = Math.floor(Math.random() * dictionary.length);
+
+    console.log('dictionary', dictionary);
+
+    const random= dictionary[index];
+    console.log('random', random);
+    console.log('index',index);
+
+    return random;
   }
 }
