@@ -42,6 +42,12 @@ export class SpyServiceService {
     });
   }
 
+  updateActualState(indexes: number[], team: 'team1' | 'team2') {
+    indexes.forEach((index) => {
+      this.spyBoard[index].actualState = team;
+    });
+  }
+
   private shuffle(array: CardState[]) {
     let currentIndex = array.length,
       randomIndex;
