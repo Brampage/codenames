@@ -13,6 +13,8 @@ interface SpyCard {
 export class SpyService {
   spyBoard: SpyCard[] = [];
   length: number = 0;
+  team2Length = 0;
+  team1Length = 0;
 
   constructor() {}
 
@@ -29,6 +31,9 @@ export class SpyService {
     const team1 = Array(defaultTeamLength + 1).fill('team1');
     const team2 = Array(defaultTeamLength).fill('team2');
     const dead = Array(defaultTeamLength - 1).fill('neutral');
+
+    this.team1Length = team1.length;
+    this.team2Length = team2.length;
 
     const states: CardState[] = [...team1, ...team2, ...dead, 'kill'];
 
@@ -49,6 +54,27 @@ export class SpyService {
       card.actualState = card.state;
     });
     console.log('updated:', this.spyBoard);
+  }
+
+  public checkWinner(): string {
+    const selectedTeam1Length = this.spyBoard.filter(
+      (card) => card.actualState === 'team1'
+    ).length;
+    const selectedTeam2Length = this.spyBoard.filter(
+      (card) => card.actualState === 'team2'
+    ).length;
+
+    if (selectedTeam1Length === this.team1Length) {
+      console.log('team 1 won!!!');
+      return 'team1';
+    }
+
+    if (selectedTeam2Length === this.team2Length) {
+      console.log('team 2 won!!!');
+      return 'team2';
+    }
+
+    return '';
   }
 
   private shuffle(array: CardState[]) {
