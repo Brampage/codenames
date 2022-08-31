@@ -27,7 +27,7 @@ export class AgentBoardComponent implements OnInit, OnDestroy {
 
   constructor(
     private wordsService: WordsService,
-    private spyService: SpyService
+    public spyService: SpyService
   ) {}
 
   ngOnInit(): void {
@@ -50,16 +50,35 @@ export class AgentBoardComponent implements OnInit, OnDestroy {
   }
 
   onSubmitTeam1(): void {
-    console.log(
-      'submit team 1',
-      this.words.findIndex((word) => word.isSelected)
-    );
+    const selectedWordIndexes = this.words
+      .map((word, index) => (word.isSelected ? index : -1))
+      .filter((x) => x !== -1);
+
+    this.spyService.updateActualState(selectedWordIndexes, 'team1');
+    this.resetSelected();
   }
 
   onSubmitTeam2(): void {
-    console.log(
-      'submit team 2',
-      this.words.filter((word) => word.isSelected)
+    const selectedWordIndexes = this.words
+      .map((word, index) => (word.isSelected ? index : -1))
+      .filter((x) => x !== -1);
+
+    this.spyService.updateActualState(selectedWordIndexes, 'team2');
+    this.resetSelected();
+  }
+
+  resetSelected(): void {
+    this.words = this.words.map((x) => ({ ...x, isSelected: false }));
+  }
+
+  onShowSpyCard(): void {
+    this.spyService.updateActualState(
+      Array.from({ length: 25 }, (v, i) => i),
+      'team1'
+    );
+    this.spyService.updateActualState(
+      Array.from({ length: 25 }, (v, i) => i),
+      'team2'
     );
   }
 }
