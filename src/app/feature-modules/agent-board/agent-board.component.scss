@@ -1,0 +1,15 @@
+.agent-board {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+  
+  .agent-board__card {
+    display: block;
+    text-align: center;
+    padding: 1rem;
+    background-color: purple;
+    color: white;
+  }
+}
