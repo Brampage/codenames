@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { SpyServiceService } from '../spy-service/spy-service.service';
 import { WordsService } from '../words-service/words.service';
 
 export interface Word {
@@ -31,6 +32,8 @@ export class AgentBoardComponent implements OnInit, OnDestroy {
     this.words$.pipe(takeUntil(this.subscriptions)).subscribe((words) => {
       this.words = words;
     });
+
+    this.spyService.initializeGame();
   }
 
   ngOnDestroy(): void {
