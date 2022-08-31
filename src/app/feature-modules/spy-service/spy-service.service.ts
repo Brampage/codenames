@@ -12,6 +12,8 @@ interface SpyCard {
 })
 export class SpyServiceService {
   spyBoard: SpyCard[] = [];
+  length: number = 0;
+
   constructor() {}
 
   getSpyBoard(): SpyCard[] {
@@ -22,16 +24,48 @@ export class SpyServiceService {
     return this.spyBoard[index].state;
   }
 
-  initializeGame(): void {
-    this.spyBoard = Array.apply(null, Array(length)).map(() => {
+  initializeGame(length: number): void {
+    const defaultTeamLength = (length - (length % 3)) / 3;
+    const team1 = Array(defaultTeamLength + 1).fill('team1');
+    const team2 = Array(defaultTeamLength).fill('team2');
+    const dead = Array(defaultTeamLength - 1).fill('dead');
+
+    const states: CardState[] = [...team1, ...team2, ...dead, 'kill'];
+
+    this.shuffle(states);
+
+    console.log('states', states);
+
+    this.spyBoard = states.map((state) => {
       return {
-        state: this.getRandomState(),
+        state: state,
         actualState: null,
       };
     });
+    console.log('this.spyBoard', this.spyBoard);
   }
 
   private getRandomState(): CardState {
     return 'dead';
+  }
+
+  private shuffle(array: CardState[]) {
+    let currentIndex = array.length,
+      randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ];
+    }
+
+    return array;
   }
 }

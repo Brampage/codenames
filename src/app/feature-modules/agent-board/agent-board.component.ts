@@ -36,7 +36,7 @@ export class AgentBoardComponent implements OnInit, OnDestroy {
       this.words = words;
     });
 
-    this.spyService.initializeGame();
+    this.spyService.initializeGame(25);
   }
 
   ngOnDestroy(): void {
