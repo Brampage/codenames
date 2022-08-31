@@ -1,3 +1,4 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -12,9 +13,10 @@ import {AgentBoardModule} from './feature-modules/agent-board/agent-board.module
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AgentBoardModule
+    AgentBoardModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
