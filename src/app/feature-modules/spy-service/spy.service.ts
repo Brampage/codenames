@@ -21,7 +21,7 @@ export class SpyService {
   }
 
   checkCardState(index: number) {
-    return this.spyBoard[index].state;
+    return this.spyBoard[index].actualState;
   }
 
   initializeGame(length: number): void {
@@ -44,7 +44,8 @@ export class SpyService {
 
   updateActualState(indexes: number[], team: 'team1' | 'team2') {
     indexes.forEach((index) => {
-      this.spyBoard[index].actualState = team;
+      const card = this.spyBoard[index];
+      card.actualState = team === card.state ? team : null;
     });
   }
 
