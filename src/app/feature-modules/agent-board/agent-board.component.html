@@ -6,16 +6,24 @@
         class="agent-board__card"
         [ngClass]="{ 'card--selected': word.isSelected }"
       >
-        {{ word.text }}
+        <span>{{ word.text }}</span>
       </div>
     </ng-container>
   </div>
   <div class="submit">
-    <button [disabled]="isSubmitDisabled" (click)="onSubmitTeam1()">
-      Confirm as team 1
+    <button
+      [disabled]="isSubmitDisabled"
+      class="button--red"
+      (click)="onSubmitTeam1()"
+    >
+      Confirm as team blue
     </button>
-    <button [disabled]="isSubmitDisabled" (click)="onSubmitTeam2()">
-      Confirm as team 2
+    <button
+      [disabled]="isSubmitDisabled"
+      class="button--blue"
+      (click)="onSubmitTeam2()"
+    >
+      Confirm as team red
     </button>
   </div>
 </div>

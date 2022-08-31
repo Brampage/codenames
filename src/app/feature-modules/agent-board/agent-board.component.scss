@@ -17,11 +17,19 @@
     .agent-board__card {
       display: flex;
       justify-content: center;
-      align-items: center;
-      background-color: lightblue;
+      align-items: flex-end;
+      background-color: #f5d9b6;
       color: black;
       cursor: pointer;
       border-radius: 0.2rem;
+
+      span {
+        width: 70%;
+        background-color: white;
+        padding: 5px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
     }
 
     .card--selected {
@@ -35,7 +43,6 @@
     gap: 1rem;
 
     button {
-      background-color: #008cba;
       border: none;
       color: white;
       padding: 2rem 2rem;
@@ -43,7 +50,18 @@
       text-decoration: none;
       display: inline-block;
       cursor: pointer;
+    }
 
+    button.button--red {
+      background-color: darkred;
+      &[disabled] {
+        background-color: lightcoral;
+        cursor: default;
+      }
+    }
+
+    button.button--blue {
+      background-color: #008cba;
       &[disabled] {
         background-color: lightblue;
         cursor: default;
