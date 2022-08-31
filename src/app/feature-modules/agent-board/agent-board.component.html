@@ -11,7 +11,11 @@
     </ng-container>
   </div>
   <div class="submit">
-    <button (click)="onSubmit()">Submit as team 1</button>
-    <button (click)="onSubmit()">Submit as team 2</button>
+    <button [disabled]="isSubmitDisabled" (click)="onSubmitTeam1()">
+      Confirm as team 1
+    </button>
+    <button [disabled]="isSubmitDisabled" (click)="onSubmitTeam2()">
+      Confirm as team 2
+    </button>
   </div>
 </div>

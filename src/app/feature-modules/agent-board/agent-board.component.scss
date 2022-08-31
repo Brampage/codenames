@@ -18,10 +18,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 1rem;
       background-color: lightblue;
       color: black;
       cursor: pointer;
+      border-radius: 0.2rem;
     }
 
     .card--selected {
@@ -43,6 +43,11 @@
       text-decoration: none;
       display: inline-block;
       cursor: pointer;
+
+      &[disabled] {
+        background-color: lightblue;
+        cursor: default;
+      }
     }
 
     button:not(:last-child) {

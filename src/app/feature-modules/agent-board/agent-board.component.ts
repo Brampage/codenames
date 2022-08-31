@@ -20,6 +20,10 @@ export class AgentBoardComponent implements OnInit, OnDestroy {
   dictionary: string[] = [];
   subscriptions = new Subject();
 
+  get isSubmitDisabled(): boolean {
+    return this.words.findIndex((x) => x.isSelected) === -1;
+  }
+
   constructor(private wordsService: WordsService) {}
 
   ngOnInit(): void {
@@ -39,7 +43,17 @@ export class AgentBoardComponent implements OnInit, OnDestroy {
     this.words[index].isSelected = !this.words[index].isSelected;
   }
 
-  onSubmit(): void {
-    console.log('submit', this.words.filter(word => word.isSelected));
+  onSubmitTeam1(): void {
+    console.log(
+      'submit team 1',
+      this.words.filter((word) => word.isSelected)
+    );
+  }
+
+  onSubmitTeam2(): void {
+    console.log(
+      'submit team 2',
+      this.words.filter((word) => word.isSelected)
+    );
   }
 }
