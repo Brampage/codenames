@@ -13,4 +13,8 @@
     background-color: purple;
     color: white;
   }
+
+  .card--selected {
+    box-shadow: inset 0px 0px 20px deeppink;
+  }
 }
