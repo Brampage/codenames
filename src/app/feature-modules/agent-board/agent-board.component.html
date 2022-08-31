@@ -1,10 +1,16 @@
 <div class="container">
   <div class="agent-board">
-    <ng-container *ngFor="let word of words">
+    <ng-container *ngFor="let word of words; index as i">
       <div
         (click)="onCardClick(word)"
         class="agent-board__card"
-        [ngClass]="{ 'card--selected': word.isSelected }"
+        [ngClass]="{
+          'card--selected': word.isSelected,
+          'card--team1': spyService.checkCardState(i) === 'team1',
+          'card--team2': spyService.checkCardState(i) === 'team2',
+          'card--neutral': spyService.checkCardState(i) === 'neutral',
+          'card--kill': spyService.checkCardState(i) === 'kill'
+        }"
       >
         <span>{{ word.text }}</span>
       </div>
@@ -13,17 +19,20 @@
   <div class="submit">
     <button
       [disabled]="isSubmitDisabled"
-      class="button--red"
+      class="button--blue"
       (click)="onSubmitTeam1()"
     >
       Confirm as team blue
     </button>
     <button
       [disabled]="isSubmitDisabled"
-      class="button--blue"
+      class="button--red"
       (click)="onSubmitTeam2()"
     >
       Confirm as team red
+    </button>
+    <button class="button--transparent" (click)="onShowSpyCard()">
+      Show Spy Card
     </button>
   </div>
 </div>
