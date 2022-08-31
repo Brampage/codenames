@@ -1,8 +1,11 @@
 <div class="agent-board">
-  <ng-container *ngFor="let word of words$ | async">
-    <div *ngIf="word !== undefined" class="agent-board__card" (click)="onCardClick(word)">
-      {{word.text}}
+  <ng-container *ngFor="let word of words">
+    <div
+      (click)="onCardClick(word)"
+      class="agent-board__card"
+      [ngClass]="{ 'card--selected': word.isSelected }"
+    >
+      {{ word.text }}
     </div>
   </ng-container>
-
 </div>
