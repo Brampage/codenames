@@ -20,6 +20,7 @@ export class AgentBoardComponent implements OnInit, OnDestroy {
   selectedWords: Word[] = [];
   dictionary: string[] = [];
   subscriptions = new Subject();
+  winner: 'team1' | 'team2' | 'kill' | '' = '';
 
   get isSubmitDisabled(): boolean {
     return this.words.findIndex((x) => x.isSelected) === -1;
@@ -50,18 +51,19 @@ export class AgentBoardComponent implements OnInit, OnDestroy {
   }
 
   onSubmitTeam1(): void {
-    this.submit();
+    this.submit('team1');
   }
 
   onSubmitTeam2(): void {
-    this.submit();
+    this.submit('team2');
   }
 
   onShowSpyCard(): void {
     this.spyService.updateActualState(Array.from({ length: 25 }, (v, i) => i));
   }
 
-  private submit(): void {
+  private submit(team: 'team1' | 'team2'): void {
+    this.winner = this.spyService.checkWinner(team);
     const selectedWordIndexes = this.words
       .map((word, index) => (word.isSelected ? index : -1))
       .filter((x) => x !== -1);

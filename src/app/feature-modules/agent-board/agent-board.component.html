@@ -22,17 +22,20 @@
       class="button--blue"
       (click)="onSubmitTeam1()"
     >
-      Confirm as team blue
+      {{ winner === "team1" ? "You won!" : "Confirm as team blue" }}
     </button>
     <button
       [disabled]="isSubmitDisabled"
       class="button--red"
       (click)="onSubmitTeam2()"
     >
-      Confirm as team red
+      {{ winner === "team2" ? "You won!" : "Confirm as team red" }}
     </button>
     <button class="button--transparent" (click)="onShowSpyCard()">
       Show Spy Card
     </button>
+  </div>
+  <div class="lost">
+    {{ winner === "kill" ? "You lost!" : "" }}
   </div>
 </div>
