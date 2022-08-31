@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 
+interface Word {
+  word: string;
+  isSelected: boolean;
+}
+
 @Component({
   selector: 'app-agent-board',
   templateUrl: './agent-board.component.html',
@@ -8,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AgentBoardComponent implements OnInit {
 
-  words: string[] = [];
+  words: Word[] = [];
 
   constructor() { 
   }
@@ -18,9 +23,17 @@ export class AgentBoardComponent implements OnInit {
     this.words = this.getWords(25);
   }
 
-  getWords (length: number): string[] {
+  getWords(length: number): string[] {
     // replace with word generator
     return new Array<string>(length).fill('noun');
   }
 
+  onCardClick(word: string): void {
+    const isInSelectedWords = this.selectedWords.includes(word);
+    if (isInSelectedWords) {
+      this.selectedWords = this.selectedWords.filter((x) => x !== word);
+    } else {
+      this.selectedWords = this.selectedWords = [...this.words, word];
+    }
+  }
 }
