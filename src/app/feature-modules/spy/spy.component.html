@@ -1,0 +1,16 @@
+<div class="agent-board">
+  <ng-container *ngFor="let word of words$ | async; index as i">
+    <div
+      class="agent-board__card"
+      [ngClass]="{
+        'card--selected': word.isSelected,
+        'card--team1': spyService.checkSpyCardState(i) === 'team1',
+        'card--team2': spyService.checkSpyCardState(i) === 'team2',
+        'card--neutral': spyService.checkSpyCardState(i) === 'neutral',
+        'card--kill': spyService.checkSpyCardState(i) === 'kill'
+      }"
+    >
+      <span>{{ word.text }}</span>
+    </div>
+  </ng-container>
+</div>

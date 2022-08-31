@@ -26,6 +26,10 @@ export class SpyService {
     return this.spyBoard[index].actualState;
   }
 
+  checkSpyCardState(index: number) {
+    return this.spyBoard[index].state;
+  }
+
   initializeGame(length: number): void {
     const defaultTeamLength = (length - (length % 3)) / 3;
     const team1 = Array(defaultTeamLength + 1).fill('team1');
@@ -56,7 +60,7 @@ export class SpyService {
     console.log('updated:', this.spyBoard);
   }
 
-  public checkWinner(team: 'team1' | 'team2'): string {
+  public checkWinner(team: 'team1' | 'team2'): 'team1' | 'team2' | 'kill' | '' {
     const selectedTeam1Length = this.spyBoard.filter(
       (card) => card.actualState === 'team1'
     ).length;

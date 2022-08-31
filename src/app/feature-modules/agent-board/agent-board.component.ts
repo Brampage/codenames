@@ -36,8 +36,6 @@ export class AgentBoardComponent implements OnInit, OnDestroy {
     this.words$.pipe(takeUntil(this.subscriptions)).subscribe((words) => {
       this.words = words;
     });
-
-    this.spyService.initializeGame(25);
   }
 
   ngOnDestroy(): void {
@@ -63,13 +61,13 @@ export class AgentBoardComponent implements OnInit, OnDestroy {
   }
 
   private submit(team: 'team1' | 'team2'): void {
-    this.winner = this.spyService.checkWinner(team);
     const selectedWordIndexes = this.words
       .map((word, index) => (word.isSelected ? index : -1))
       .filter((x) => x !== -1);
 
     this.spyService.updateActualState(selectedWordIndexes);
     this.resetSelected();
+    this.winner = this.spyService.checkWinner(team);
   }
 
   private resetSelected(): void {
