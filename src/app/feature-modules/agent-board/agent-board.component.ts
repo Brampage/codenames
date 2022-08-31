@@ -32,7 +32,7 @@ export class AgentBoardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.words$ = this.wordsService.getWords(25);
+    this.words$ = this.wordsService.getWords();
     this.words$.pipe(takeUntil(this.subscriptions)).subscribe((words) => {
       this.words = words;
     });

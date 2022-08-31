@@ -10,6 +10,7 @@ import { Observable, Subject } from 'rxjs';
 export class WordsService implements OnDestroy {
   subscriptions = new Subject<any>();
   selected: string[] = [];
+  words$: Observable<Word[]> = new Observable<Word[]>();
 
   constructor(private http: HttpClient) {}
 
@@ -18,20 +19,26 @@ export class WordsService implements OnDestroy {
     this.subscriptions.complete();
   }
 
-  getWords(length: number): Observable<Word[]> {
-    return this.http.get('/assets/words.txt', { responseType: 'text' }).pipe(
-      takeUntil(this.subscriptions),
-      map((rawWords) => {
-        const dictionary: string[] = rawWords.split(/\n/);
+  getWords(): Observable<Word[]> {
+    return this.words$;
+  }
 
-        return Array.apply(null, Array(length)).map(() => {
-          return {
-            text: this.getRandomWord(dictionary),
-            isSelected: false,
-          };
-        });
-      })
-    );
+  initialize(length: number): void {
+    this.words$ = this.http
+      .get('/assets/words.txt', { responseType: 'text' })
+      .pipe(
+        takeUntil(this.subscriptions),
+        map((rawWords) => {
+          const dictionary: string[] = rawWords.split(/\n/);
+
+          return Array.apply(null, Array(length)).map(() => {
+            return {
+              text: this.getRandomWord(dictionary),
+              isSelected: false,
+            };
+          });
+        })
+      );
   }
 
   getRandomWord(dictionary: string[]): string {

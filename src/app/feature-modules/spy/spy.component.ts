@@ -19,6 +19,6 @@ export class SpyComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.spyService.getSpyBoard());
-    this.words$ = this.wordsService.getWords(25);
+    this.words$ = this.wordsService.getWords();
   }
 }
