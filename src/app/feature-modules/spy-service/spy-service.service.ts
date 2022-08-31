@@ -42,10 +42,6 @@ export class SpyServiceService {
     });
   }
 
-  private getRandomState(): CardState {
-    return 'dead';
-  }
-
   private shuffle(array: CardState[]) {
     let currentIndex = array.length,
       randomIndex;
